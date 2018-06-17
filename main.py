@@ -58,18 +58,23 @@ def form_evaluation():
         if verify_password != password:
             error_ver = "Passwords do not match"
 
-    if ' ' in email:
-        error_em = "Please format email address correctly"
-    elif len(email) < 3:
-        error_em = "Please make sure email is long enough"
-    elif len(email) > 40:
-        error_em = "Please make sure email is not too long"
+    is_valid = validate_email(email)
+    
+    if not email:
+        error_em = ''
     else:
-        is_valid = validate_email(email)
-        if not is_valid:
-            error_em = "Please make sure email address is formatted correctly"
+        if ' ' in email:
+            error_em = "Please format email address correctly"
+        elif len(email) < 3:
+            error_em = "Please make sure email is long enough"
+        elif len(email) > 40:
+            error_em = "Please make sure email is not too long"
+        else:
+            if not is_valid:
+                error_em = "Please make sure email address is formatted correctly"
+ 
 
-    if not error_user and not error_pass and not error_ver and not error_em:
+    if not error_user and not error_pass and not error_ver:
         return redirect ('/welcome?username={0}'.format(username))
     else:
         return render_template('index_homepage.html', error_username=error_user, error_password=error_pass, error_verify_password=error_ver, error_email=error_em, saved_username=username, saved_email=email)
