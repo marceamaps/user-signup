@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, render_template
 import cgi
 import urllib
 import jinja2
+from validate_email import validate_email
 
 
 app = Flask(__name__)
@@ -18,11 +19,12 @@ def form_evaluation():
     username = request.form['username']
     password = request.form['password']
     verify_password = request.form['verify_password']
-    # email = request.form['email']
+    email = request.form['email']
 
     error_user = ''
     error_pass = ''
     error_ver = ''
+    error_em = ''
 
     if not username:
         error_user = "That's not a valid username"
@@ -56,10 +58,21 @@ def form_evaluation():
         if verify_password != password:
             error_ver = "Passwords do not match"
 
-    if not error_user and not error_pass and not error_ver:
+    if ' ' in email:
+        error_em = "Please format email address correctly"
+    elif len(email) < 3:
+        error_em = "Please make sure email is long enough"
+    elif len(email) > 40:
+        error_em = "Please make sure email is not too long"
+    else:
+        is_valid = validate_email(email)
+        if not is_valid:
+            error_em = "Please make sure email address is formatted correctly"
+
+    if not error_user and not error_pass and not error_ver and not error_em:
         return redirect ('/welcome?username={0}'.format(username))
     else:
-        return render_template('index_homepage.html', error_username=error_user, error_password=error_pass, error_verify_password=error_ver )
+        return render_template('index_homepage.html', error_username=error_user, error_password=error_pass, error_verify_password=error_ver, error_email=error_em, saved_username=username, saved_email=email)
 
 
 @app.route("/welcome")
