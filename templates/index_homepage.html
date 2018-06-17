@@ -1,0 +1,59 @@
+<header> 
+    <h1> Signup  </h1> 
+</header>
+
+    <style>
+        label {
+            display: block;
+        }
+        form {
+            font-family: "arial";
+        }
+        .error { 
+            color: red;
+        }
+        input[type=text] {
+            width: 25%; 
+            padding: 6px 10px;
+            box-sizing: border-box;
+        }
+        input[type=submit] { 
+            background-color: #3CBC8D;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+        }
+    </style>
+
+    <form action='/add' method='POST'>
+        <label id='username'>
+            Username:
+            <input type="text" name="username" id="username" />
+            <span class="error">{{ error_username }}</span>
+        </label>
+    
+        <form action='/add' method='POST'>
+            <label id='password'>
+                Password:
+                <input type="text" name="password" id="password" />
+                <span class="error">{{ error_password }}</span>
+            </label>
+
+        <form action='/add' method='POST'>
+            <label id='verify_password'>
+                Verify Password:
+                <input type="text" name="verify_password" id="verify_password" />
+                <span class="error">{{ error_verify_password }}</span>
+            </label>
+
+
+        <form action='/add' method='POST'>
+            <label id='email'>
+                Email (Optional):
+                <input type="text" name="email" id="email" />
+                <span class="error">{{ error_email }}</span>
+            </label>
+
+            <input type="submit" value="Submit" />
+        </form>
+
