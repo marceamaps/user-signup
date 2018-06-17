@@ -35,7 +35,7 @@
     <form action='/add' method='POST'>
         <label id='username'>
             Username:
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" value="{{ saved_username }}" />
             <span class="error">{{ error_username }}</span>
         </label>
     
@@ -54,7 +54,7 @@
 
             <label id='email'>
                 Email (Optional):
-                <input type="text" name="email" id="email" />
+                <input type="text" name="email" id="email" value="{{ saved_email }}"/>
                 <span class="error">{{ error_email }}</span>
             </label>
 
