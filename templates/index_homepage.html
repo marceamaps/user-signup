@@ -1,3 +1,5 @@
+<!doctype html>
+<html>
 <header> 
     <h1> Signup  </h1> 
 </header>
@@ -17,6 +19,11 @@
             padding: 6px 10px;
             box-sizing: border-box;
         }
+        input[type=password] {
+            width: 25%; 
+            padding: 6px 10px;
+            box-sizing: border-box;
+        }
         input[type=submit] { 
             background-color: #3CBC8D;
             border: none;
@@ -32,22 +39,19 @@
             <span class="error">{{ error_username }}</span>
         </label>
     
-        <form action='/add' method='POST'>
             <label id='password'>
                 Password:
-                <input type="text" name="password" id="password" />
+                <input type="password" name="password" id="password" />
                 <span class="error">{{ error_password }}</span>
             </label>
 
-        <form action='/add' method='POST'>
             <label id='verify_password'>
                 Verify Password:
-                <input type="text" name="verify_password" id="verify_password" />
+                <input type="password" name="verify_password" id="verify_password" />
                 <span class="error">{{ error_verify_password }}</span>
             </label>
 
 
-        <form action='/add' method='POST'>
             <label id='email'>
                 Email (Optional):
                 <input type="text" name="email" id="email" />
@@ -56,4 +60,5 @@
 
             <input type="submit" value="Submit" />
         </form>
+    </html>
 
